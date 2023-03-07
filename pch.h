@@ -1,39 +1,45 @@
 ﻿#pragma once
+#include <string>
+#include <iostream>
+using namespace std;
 
-struct Node {
-	int data;
-	Node* next;
-	Node(int data);
-};
-
-class LinkedList {
-private:
-	Node* head;
-	Node* tail;
-	int num_items;
+class Employee {
+protected:
+    string name;
+    int employee_id;
 public:
-	LinkedList();
-
-	// Methods for adding and removing nodes from the front and back of the list
-	void push_front(int data);
-	void push_back(int data);
-	void pop_front();
-	void pop_back();
-	
-	void front_back();// method to print values at front and back of Linked List
-
-	bool empty(); // Method for checking if the list is empty
-
-	bool remove(size_t index); // Method for removing a node at a specified index
-
-
-	void insert(size_t index, const int& item); // Method for inserting a node at a specified index
-
-
-	size_t find(const int& item); // Method for finding the index of a node with a specified data value
-
-
-	void printlist(); // Method for printing the data values of all nodes in the list
-
+    Employee(string n, int id);     // Constructor
+    virtual double weekly_salary() = 0;      // Virtual function for calculating weekly salary
+    virtual double health_care_contributions() = 0;      // Virtual function for calculating health care contributions
+    virtual double vacation_days_earned() = 0;      // Virtual function for calculating vacation days earned
 };
+
+
+class Professional : public Employee { 
+private:
+    double pay_rate;
+    int worked_hours;
+public:
+    Professional(string n, int id, double salary, int days);
+    string get_name();
+    double weekly_salary() override;
+    double health_care_contributions() override;
+    double vacation_days_earned() override;
+};
+
+class Nonprofessional : public Employee {  // Nonprofessional class declaration, derived from Employee
+
+private:
+    double pay_rate;
+    int worked_hours;
+public:
+    Nonprofessional(string n, int id, double rate, int hours);
+    double weekly_salary() override;
+    double health_care_contributions() override;
+    double vacation_days_earned() override;
+    double weekly_salary(int hours_worked);
+    double health_care_contributions(double salary);
+    double vacation_days_earned(int hours_worked);
+};
+
 
