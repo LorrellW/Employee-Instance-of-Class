@@ -9,10 +9,6 @@ Employee::Employee(string n, int id) : name(n), employee_id(id) {}
 Professional::Professional(string n, int id, double payRate, int hours)
     : Employee(n, id), pay_rate(payRate), worked_hours(hours) {}
 
-//string set_name() { // set name
-//    string name = name;
-//    return name;
-//}
 
 double Professional::weekly_salary() {
     return pay_rate * worked_hours;  // pay rate * hours worked
